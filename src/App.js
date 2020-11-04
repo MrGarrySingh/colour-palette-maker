@@ -1,9 +1,12 @@
+import React from "react";
+import Palette from "./components/Palette/Palette.jsx";
+import seedPalettes from "./seedPalettes.js";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>COLOR PALETTE MAKER</h1>
+      <Palette {...seedPalettes[4]} />
     </div>
   );
 }
