@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import ColourBox from "../ColourBox/ColourBox.jsx";
+import Slider from "rc-slider";
 
+import "rc-slider/assets/index.css";
 import "./Palette.css";
 
-function Palette({ colors, emoji, id, paletteName }) {
+function Palette({ palette }) {
+  const [level, setLevel] = useState(500);
+
+  const changeLevel = (level) => {
+    setLevel(level);
+  };
+
   return (
     <div className="palette">
+      <Slider
+        defaultValue={level}
+        min={100}
+        max={900}
+        step={100}
+        onAfterChange={changeLevel}
+      />
       {/* Navbar */}
       <div className="palette__colors">
-        {colors.map((color) => (
-          <ColourBox bgColor={color.color} name={color.name} />
+        {palette.colors[level].map((color) => (
+          <ColourBox bgColor={color.hex} name={color.name} />
         ))}
       </div>
       {/* Footer */}
