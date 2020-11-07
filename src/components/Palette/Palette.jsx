@@ -14,13 +14,15 @@ function Palette({ palette }) {
 
   return (
     <div className="palette">
-      <Slider
-        defaultValue={level}
-        min={100}
-        max={900}
-        step={100}
-        onAfterChange={changeLevel}
-      />
+      <div className="palette__slider">
+        <Slider
+          defaultValue={level}
+          min={100}
+          max={900}
+          step={100}
+          onAfterChange={changeLevel}
+        />
+      </div>
       {/* Navbar */}
       <div className="palette__colors">
         {palette.colors[level].map((color) => (
