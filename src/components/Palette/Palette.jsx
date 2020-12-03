@@ -25,10 +25,13 @@ function Palette({ palette }) {
       />
       <div className="palette__colors">
         {palette.colors[level].map((color) => (
-          <ColourBox bgColor={color[format]} name={color.name} />
+          <ColourBox bgColor={color[format]} name={color.name} key={color.id} />
         ))}
       </div>
-      {/* Footer */}
+      <footer className="palette__footer">
+        {palette.paletteName}
+        <span className="palette__footerEmoji">{palette.emoji}</span>
+      </footer>
     </div>
   );
 }
