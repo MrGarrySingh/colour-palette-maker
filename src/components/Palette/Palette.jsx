@@ -25,7 +25,13 @@ function Palette({ palette }) {
       />
       <div className="palette__colors">
         {palette.colors[level].map((color) => (
-          <ColourBox bgColor={color[format]} name={color.name} key={color.id} />
+          <ColourBox
+            bgColor={color[format]}
+            name={color.name}
+            key={color.id}
+            id={color.id}
+            paletteId={palette.id}
+          />
         ))}
       </div>
       <footer className="palette__footer">

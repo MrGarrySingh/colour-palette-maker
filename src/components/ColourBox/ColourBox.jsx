@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./ColourBox.css";
 
-function ColourBox({ bgColor, name }) {
+function ColourBox({ bgColor, name, paletteId, id }) {
   const [copied, setCopied] = useState(false);
 
   const toggleCopy = () => {
@@ -30,7 +30,10 @@ function ColourBox({ bgColor, name }) {
             <span>{name}</span>
           </div>
           <button className="colourBox__button">COPY</button>
-          <Link to="/" onClick={(e) => e.stopPropagation()}>
+          <Link
+            to={`/palette/${paletteId}/${id}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <span className="colourBox__more">MORE</span>
           </Link>
         </div>
