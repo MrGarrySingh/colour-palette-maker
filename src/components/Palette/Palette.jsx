@@ -31,6 +31,7 @@ function Palette({ palette }) {
             key={color.id}
             id={color.id}
             paletteId={palette.id}
+            showLink={true}
           />
         ))}
       </div>
