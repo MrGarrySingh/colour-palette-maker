@@ -28,6 +28,14 @@
   font-size: 12px;
 }
 
+.colourBox__lightText {
+  color: white;
+}
+
+.colourBox .colourBox__darkText {
+  color: RGBA(0, 0, 0, 0.75);
+}
+
 .colourBox__button,
 .colourBox__backButton {
   width: 100px;
