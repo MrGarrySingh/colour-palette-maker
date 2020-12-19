@@ -10,7 +10,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import "rc-slider/assets/index.css";
 import "./Navbar.css";
 
-const Navbar = ({ level, changeLevel, handleChange }) => {
+const Navbar = ({ level, changeLevel, handleChange, showSlider }) => {
   const [format, setFormat] = useState("hex");
   const [open, setOpen] = useState(false);
 
@@ -30,18 +30,20 @@ const Navbar = ({ level, changeLevel, handleChange }) => {
       <div className="navbar__logo">
         <Link to="/">colourpalettemaker</Link>
       </div>
-      <div className="navbar__sliderContainer">
-        <span>Level: {level}</span>
-        <div className="navbar__slider">
-          <Slider
-            defaultValue={level}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={changeLevel}
-          />
+      {showSlider && (
+        <div className="navbar__sliderContainer">
+          <span>Level: {level}</span>
+          <div className="navbar__slider">
+            <Slider
+              defaultValue={level}
+              min={100}
+              max={900}
+              step={100}
+              onAfterChange={changeLevel}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="navbar__selectContainer">
         <Select onChange={changeFormat} value={format}>
           <MenuItem value="hex">HEX - #FFFFFF</MenuItem>
