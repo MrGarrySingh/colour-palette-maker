@@ -8,6 +8,14 @@
   margin-bottom: -4px;
 }
 
+.singleColourPalette .colourBox {
+  height: 50%;
+}
+
+.colourBox.palette__goBack {
+  background-color: black;
+}
+
 .colourBox__boxContent {
   position: absolute;
   padding: 10px;
@@ -20,7 +28,8 @@
   font-size: 12px;
 }
 
-.colourBox__button {
+.colourBox__button,
+.colourBox__backButton {
   width: 100px;
   height: 30px;
   position: absolute;
@@ -36,6 +45,10 @@
   line-height: 30px;
   color: white;
   border: none;
+  text-decoration: none;
+}
+
+.colourBox__button {
   opacity: 0;
 }
 
