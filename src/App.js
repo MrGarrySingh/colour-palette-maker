@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Palette from "./components/Palette/Palette.jsx";
 import PaletteList from "./components/PaletteList/PaletteList.jsx";
 import SingleColourPalette from "./components/SingleColourPalette/SingleColourPalette.jsx";
+import NewPaletteForm from "./components/NewPaletteForm/NewPaletteForm.jsx";
 import seedPalettes from "./seedPalettes.js";
 import { generatePalette } from "./colorHelpers.js";
 
@@ -17,6 +18,19 @@ function App() {
 
   return (
     <Switch>
+      <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
+      <Route
+        exact
+        path="/palette/:paletteId/:colorId"
+        render={(routeProps) => (
+          <SingleColourPalette
+            colorId={routeProps.match.params.colorId}
+            palette={generatePalette(
+              findPalette(routeProps.match.params.paletteId)
+            )}
+          />
+        )}
+      />
       <Route
         exact
         path="/"
@@ -30,18 +44,6 @@ function App() {
         render={(routeProps) => (
           <Palette
             palette={generatePalette(findPalette(routeProps.match.params.id))}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/palette/:paletteId/:colorId"
-        render={(routeProps) => (
-          <SingleColourPalette
-            colorId={routeProps.match.params.colorId}
-            palette={generatePalette(
-              findPalette(routeProps.match.params.paletteId)
-            )}
           />
         )}
       />
