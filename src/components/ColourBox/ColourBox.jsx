@@ -24,6 +24,7 @@ const styles = {
       chroma(props.bgColor).luminance() >= 0.65 ? "black" : "white",
   },
   colorName: {
+    textTransform: "uppercase",
     color: (props) =>
       chroma(props.bgColor).luminance() <= 0.15 ? "white" : "black",
   },
