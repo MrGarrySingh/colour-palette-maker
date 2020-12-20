@@ -3,20 +3,7 @@ import ColourBox from "../ColourBox/ColourBox.jsx";
 import Navbar from "../Navbar/Navbar.jsx";
 import Footer from "../Footer/Footer.jsx";
 import { withStyles } from "@material-ui/styles";
-
-import "./Palette.css";
-
-const styles = {
-  palette: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-  },
-  paletteColours: {
-    height: "90%",
-    overflow: "hidden",
-  },
-};
+import styles from "../../styles/PaletteStyles.js";
 
 function Palette({ palette, classes }) {
   const [level, setLevel] = useState(500);
