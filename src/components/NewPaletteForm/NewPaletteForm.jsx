@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -74,7 +74,9 @@ const useStyles = makeStyles((theme) => ({
 
 function NewPaletteForm() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [currColor, setCurrColor] = useState("blue");
+  const [paletteColors, setPaletteColors] = useState(["blue", "red", "yellow"]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -82,6 +84,15 @@ function NewPaletteForm() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const changeColor = (color) => {
+    console.log(color);
+    setCurrColor(color.hex);
+  };
+
+  const addNewColor = () => {
+    setPaletteColors([...paletteColors, currColor]);
   };
 
   return (
@@ -133,10 +144,15 @@ function NewPaletteForm() {
           </Button>
         </div>
         <ChromePicker
-          color="purple"
-          onChangeComplete={(newColor) => console.log(newColor)}
+          color={currColor}
+          onChangeComplete={(newColor) => changeColor(newColor)}
         />
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: currColor }}
+          onClick={addNewColor}
+        >
           ADD COLOUR
         </Button>
       </Drawer>
@@ -146,6 +162,9 @@ function NewPaletteForm() {
         })}
       >
         <div className={classes.drawerHeader} />
+        {paletteColors.map((color) => (
+          <h1 style={{ backgroundColor: color }}>{color}</h1>
+        ))}
       </main>
     </div>
   );
