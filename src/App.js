@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import Palette from "./components/Palette/Palette.jsx";
 import PaletteList from "./components/PaletteList/PaletteList.jsx";
@@ -10,15 +10,27 @@ import { generatePalette } from "./colorHelpers.js";
 import "./App.css";
 
 function App() {
+  const [palettes, setPalettes] = useState(seedPalettes);
+
   const findPalette = (id) => {
-    return seedPalettes.find(function (palette) {
+    return palettes.find(function (palette) {
       return palette.id === id;
     });
   };
 
+  const savePalette = (newPalette) => {
+    setPalettes([...seedPalettes, newPalette]);
+  };
+
   return (
     <Switch>
-      <Route exact path="/palette/new" render={() => <NewPaletteForm />} />
+      <Route
+        exact
+        path="/palette/new"
+        render={(routeProps) => (
+          <NewPaletteForm savePalette={savePalette} {...routeProps} />
+        )}
+      />
       <Route
         exact
         path="/palette/:paletteId/:colorId"
@@ -35,7 +47,7 @@ function App() {
         exact
         path="/"
         render={(routeProps) => (
-          <PaletteList palettes={seedPalettes} {...routeProps} />
+          <PaletteList palettes={palettes} {...routeProps} />
         )}
       />
       <Route

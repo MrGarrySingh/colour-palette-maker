@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -75,11 +76,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm({ savePalette }) {
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = useState(false);
-  const [currColor, setCurrColor] = useState("blue");
-  const [paletteColors, setPaletteColors] = useState([]);
+  const [currColor, setCurrColor] = useState("teal");
+  const [paletteColors, setPaletteColors] = useState([
+    { color: "#123abc", name: "Blue" },
+  ]);
   const [colorName, setColorName] = useState("");
 
   const handleDrawerOpen = () => {
@@ -91,7 +95,6 @@ function NewPaletteForm() {
   };
 
   const changeColor = (color) => {
-    console.log(color);
     setCurrColor(color.hex);
   };
 
@@ -103,6 +106,19 @@ function NewPaletteForm() {
 
   const handleChange = (e) => {
     setColorName(e.target.value);
+  };
+
+  const saveNewPalette = () => {
+    const newName = "New Test Palette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      emoji: "",
+      colors: paletteColors,
+    };
+    savePalette(newPalette);
+    // Redirect to main page once palette has been saved
+    history.push("/");
   };
 
   // creating custom validation rule for the text field where we check if the added color is unique
@@ -124,6 +140,7 @@ function NewPaletteForm() {
       <CssBaseline />
       <AppBar
         position="fixed"
+        color="default"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
@@ -141,6 +158,9 @@ function NewPaletteForm() {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button variant="contained" color="primary" onClick={saveNewPalette}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
