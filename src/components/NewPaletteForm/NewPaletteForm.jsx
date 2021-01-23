@@ -122,6 +122,10 @@ function NewPaletteForm({ savePalette, palettes }) {
     history.push("/");
   };
 
+  const handleDeleteColor = (colorName) => {
+    setPaletteColors(paletteColors.filter((color) => color.name !== colorName));
+  };
+
   // creating custom validation rule for the text field where we check if the added color is unique
   useEffect(() => {
     ValidatorForm.addValidationRule("isColorNameUnique", (value) => {
@@ -237,7 +241,12 @@ function NewPaletteForm({ savePalette, palettes }) {
       >
         <div className={classes.drawerHeader} />
         {paletteColors.map((color) => (
-          <DraggableColourBox color={color.color} name={color.name} />
+          <DraggableColourBox
+            color={color.color}
+            key={color.name}
+            name={color.name}
+            handleDelete={() => handleDeleteColor(color.name)}
+          />
         ))}
       </main>
     </div>
