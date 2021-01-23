@@ -13,8 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { ChromePicker } from "react-color";
 import Button from "@material-ui/core/Button";
-import DraggableColourBox from "../DraggableColourBox/DraggableColourBox.jsx";
+import DraggableColourList from "../DraggableColourList/DraggableColourList.jsx";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { arrayMove } from "react-sortable-hoc";
 
 const drawerWidth = 480;
 
@@ -124,6 +125,10 @@ function NewPaletteForm({ savePalette, palettes }) {
 
   const handleDeleteColor = (colorName) => {
     setPaletteColors(paletteColors.filter((color) => color.name !== colorName));
+  };
+
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    setPaletteColors(arrayMove(paletteColors, oldIndex, newIndex));
   };
 
   // creating custom validation rule for the text field where we check if the added color is unique
@@ -240,14 +245,12 @@ function NewPaletteForm({ savePalette, palettes }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        {paletteColors.map((color) => (
-          <DraggableColourBox
-            color={color.color}
-            key={color.name}
-            name={color.name}
-            handleDelete={() => handleDeleteColor(color.name)}
-          />
-        ))}
+        <DraggableColourList
+          paletteColors={paletteColors}
+          handleDeleteColor={handleDeleteColor}
+          axis="xy"
+          onSortEnd={onSortEnd}
+        />
       </main>
     </div>
   );
