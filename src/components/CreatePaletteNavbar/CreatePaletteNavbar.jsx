@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,13 +11,45 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
+const drawerWidth = 480;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "64px",
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: "none",
+  },
+  navButtons: {},
+}));
+
 function CreatePaletteNavbar({
-  classes,
   open,
   palettes,
   saveNewPalette,
   handleDrawerOpen,
 }) {
+  const classes = useStyles();
   const [newPaletteName, setNewPaletteName] = useState("");
 
   // creating custom validation rule for the text field where we check if the added color is unique
@@ -29,7 +62,7 @@ function CreatePaletteNavbar({
   });
 
   return (
-    <div>
+    <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -49,8 +82,10 @@ function CreatePaletteNavbar({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Create Your Palette
           </Typography>
+        </Toolbar>
+        <div className={classes.navButtons}>
           <ValidatorForm onSubmit={() => saveNewPalette(newPaletteName)}>
             <TextValidator
               label="Palette Name"
@@ -62,16 +97,16 @@ function CreatePaletteNavbar({
                 "Palette Name already taken",
               ]}
             />
-            <Link to="/">
-              <Button variant="contained" color="secondary">
-                Go Back
-              </Button>
-            </Link>
             <Button variant="contained" color="primary" type="submit">
               Save Palette
             </Button>
           </ValidatorForm>
-        </Toolbar>
+          <Link to="/">
+            <Button variant="contained" color="secondary">
+              Go Back
+            </Button>
+          </Link>
+        </div>
       </AppBar>
     </div>
   );
