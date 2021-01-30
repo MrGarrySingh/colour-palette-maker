@@ -65,6 +65,10 @@ function CreatePaletteNavbar({
     setFormShowing(true);
   };
 
+  const hideForm = () => {
+    setFormShowing(false);
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -110,7 +114,11 @@ function CreatePaletteNavbar({
         </div>
       </AppBar>
       {formShowing && (
-        <PaletteMetaForm palettes={palettes} saveNewPalette={saveNewPalette} />
+        <PaletteMetaForm
+          palettes={palettes}
+          saveNewPalette={saveNewPalette}
+          hideForm={hideForm}
+        />
       )}
     </div>
   );

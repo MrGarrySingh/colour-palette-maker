@@ -7,13 +7,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
-function PaletteMetaForm({ palettes, saveNewPalette }) {
+function PaletteMetaForm({ palettes, saveNewPalette, hideForm }) {
   const [open, setOpen] = useState(true);
   const [newPaletteName, setNewPaletteName] = useState("");
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   // creating custom validation rule for the text field where we check if the added color is unique
   useEffect(() => {
@@ -25,11 +21,7 @@ function PaletteMetaForm({ palettes, saveNewPalette }) {
   });
 
   return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="form-dialog-title"
-    >
+    <Dialog open={open} onClose={hideForm} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
       <ValidatorForm onSubmit={() => saveNewPalette(newPaletteName)}>
         <DialogContent>
@@ -50,7 +42,7 @@ function PaletteMetaForm({ palettes, saveNewPalette }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={hideForm} color="primary">
             Cancel
           </Button>
           <Button variant="contained" color="primary" type="submit">
