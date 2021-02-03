@@ -113,13 +113,10 @@ function NewPaletteForm({ savePalette, palettes }) {
     setPaletteColors([...paletteColors, randomColor]);
   };
 
-  const saveNewPalette = (newPaletteName) => {
-    const newPalette = {
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-      emoji: "",
-      colors: paletteColors,
-    };
+  const saveNewPalette = (newPalette) => {
+    newPalette.id = newPalette.paletteName.toLowerCase().replace(/ /g, "-");
+    newPalette.colors = paletteColors;
+
     savePalette(newPalette);
     // Redirect to main page once palette has been saved
     history.push("/");
