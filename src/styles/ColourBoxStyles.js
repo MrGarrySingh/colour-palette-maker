@@ -15,7 +15,7 @@ const styles = {
     },
     [sizes.down("lg")]: {
       width: "25%",
-      height: (props) => (props.showLink ? "20%" : "33%"),
+      height: (props) => (props.showLink ? "20%" : "33.3333%"),
     },
     [sizes.down("md")]: {
       width: "50%",
@@ -115,6 +115,9 @@ const styles = {
       textAlign: "center",
       marginBottom: "0px",
       padding: "1rem",
+      [sizes.down("xs")]: {
+        fontSize: "4rem",
+      },
     },
     "& p": {
       fontSize: "2rem",
