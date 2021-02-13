@@ -68,7 +68,7 @@ function CreatePaletteNavbar({
             onClick={showForm}
             className={classes.button}
           >
-            Save Palette
+            Save
           </Button>
         </div>
       </AppBar>
