@@ -13,7 +13,7 @@ function PaletteList({ classes, palettes, history, deletePalette }) {
     <div className={classes.root}>
       <div className={classes.container}>
         <nav className={classes.nav}>
-          <h1>Colour Palettes</h1>
+          <h1 className={classes.title}>Colour Palettes</h1>
           <Link to="/palette/new">CREATE NEW PALETTE</Link>
         </nav>
         <div className={classes.palettes}>
