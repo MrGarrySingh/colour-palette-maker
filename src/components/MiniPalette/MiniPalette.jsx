@@ -5,7 +5,6 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 const MiniPalette = React.memo(
   ({ classes, paletteName, emoji, colors, goToPalette, openDialog, id }) => {
-    console.log("RENDERING: ", paletteName);
     const miniColorBoxes = colors.map((color) => (
       <div
         className={classes.miniColor}

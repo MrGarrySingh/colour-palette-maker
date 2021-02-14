@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import styles from "../../styles/ColourBoxStyles.js";
@@ -19,10 +20,14 @@ function ColourBox({ bgColor, name, paletteId, id, showLink, classes }) {
       <div style={{ background: bgColor }} className={classes.colourBox}>
         <div
           style={{ background: bgColor }}
-          className={`${classes.copyOverlay} ${copied && classes.showOverlay}`}
+          className={clsx(classes.copyOverlay, {
+            [classes.showOverlay]: copied,
+          })}
         />
         <div
-          className={`${classes.copyMessage} ${copied && classes.showMessage}`}
+          className={clsx(classes.copyMessage, {
+            [classes.showMessage]: copied,
+          })}
         >
           <h1>COPIED!</h1>
           <p className={classes.copyText}>{bgColor}</p>
