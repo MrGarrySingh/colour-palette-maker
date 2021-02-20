@@ -12,13 +12,15 @@ const styles = {
     },
   },
   root: {
-    minHeight: "100vh",
+    height: "100vh",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
     /* background by SVGBackgrounds.com */
     backgroundColor: "#222f4f",
     backgroundImage: `url(${bg})`,
+    overflow: "scroll",
+    overflowX: "hidden",
   },
   title: {
     fontSize: "1.75rem",
@@ -50,7 +52,7 @@ const styles = {
     boxSizing: "border-box",
     width: "100%",
     display: "grid",
-    gridTemplateColumns: "repeat(3, 30%)",
+    gridTemplateColumns: "repeat(3, 32%)",
     gridGap: "1.5rem",
     [sizes.down("lg")]: {
       gridTemplateColumns: "repeat(2, 50%)",
